@@ -4,14 +4,17 @@ import Text.Printf
 import Control.Monad
 import System.IO
 
---CHECKLIST / O QUE PRECISA
---CADA JOGADOR JOGA O(S) DADO(S) e coloca o resultado da pontuacao na MVar
---O placar pega as pontuacoes da MVar e vai mostrando o placar a cada jogada
+--CHECKLIST / O QUE PRECISA (ORDEM DE PRIORIDADE)
+-- 1- Fazer algo similar a um while pro jogo poder ficar rodando, dei uma lida e talvez algo semelhante a recursao
+-- 2- Arrumar os if/else, ja que eles que vao ditar a pontuacao, se e positiva ou negativa
+-- 3- Terminar dificuldade 2
+-- 4- Colocar dificuldade 2 no jogador 2
+-- 5- Fazer dificuldade 3
+-- 6- Colocar dificuldade 3 no jogador 2
+-- 7- Testar
 
---Funcoes
-
---Funcao do dado
-
+--Eletivos
+-- 1- Generalizar 4 e 6
 
 main :: IO ()
 main = do
@@ -62,7 +65,7 @@ main = do
         palpite <- getLine
         let input = (read palpite :: Int)
         --PAREI POR AQUI sono da mizera
-        
+
     --O mesmo de cima, so que pro Jogador 2
     print "Jogador 2 aposte: "
     palpite <- getLine
