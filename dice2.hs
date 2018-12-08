@@ -34,6 +34,10 @@ main = do
     let input = (read palpite :: Int)
     
     --Lanca o(s) dado(s)
+    --Aqui entra um if/else das dificuldades
+        --Se tiver >70 pontos, lanca dois dados
+        --Se tiver >85 pontos, lanca tres dados
+        --Ai so precisa ajustar depois a ordem na MVar
     number <- randomRIO (1,6) :: IO Int
 
     --Inicia duas thread, uma salva a aposta na MVar e bloqueia
@@ -54,17 +58,6 @@ main = do
     --if(aposta == dado) then 
     --     let parcial1 =  aposta
     --else let parcial1 = -aposta
-
-    --FIM if(auxTabela[0] < 70)
-    --else if(auxTabela[0] >= 70 & auxTabela[0] < 85)
-        print "Jogador 1 aposte um numero: "
-        palpite <- getLine
-        let input = (read palpite :: Int)
-
-        print "Jogador 1 aposte outro numero: "
-        palpite <- getLine
-        let input = (read palpite :: Int)
-        --PAREI POR AQUI sono da mizera
 
     --O mesmo de cima, so que pro Jogador 2
     print "Jogador 2 aposte: "

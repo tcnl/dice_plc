@@ -5,10 +5,11 @@ Professor: Márcio Lopes Cornélio
 Cinthya Moreira Lins  
 Thiago Casa Nova da Luz
 #### Regras:
-4 Jogadores  
-O primeiro jogador a chegar em 80* pontos vence  
-Pontos são marcados pelo valor tirado no dado  
-Ao alcançar 45 pontos o jogador lança 2 dados, mas só pontua se obtiver valores iguais  
+2 Jogadores  
+O primeiro jogador a chegar em 100* pontos vence  
+Os jogadores começam com 50 pontos  
+Pontos são marcados pelo valor tirado no dado, se o jogador apostar o valor correto, se nao, perde o valor da aposta  
+Ao alcançar 70 pontos o jogador lança 2 dados, mas só pontua se obtiver valores iguais  
 Ex¹: 6 e 6, pontua 6 pontos  
 Ex²:6 e 5, não pontua.  
 Ao alcançar 70 pontos o jogador lança 3 dados, mas só pontua se, e somente se, 2 dados tiverem valores iguais e o terceiro dado for de valor superior ao valor dos outros 2.  
