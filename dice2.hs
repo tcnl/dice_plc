@@ -21,9 +21,11 @@ main = do
     --Pontos iniciais
     putMVar tabela [50,50]
 
-    --Loop comecaria aqui
+    --While(ngm ganhou nem zerou) comecaria aqui
 
     --Inicio, a pessoa aposta num valor que vai cair(1-6)
+    auxTabela <- takeMVar tabela
+    --if(auxTabela[0] < 70)
     print "Jogador 1 aposte: "
     palpite <- getLine
     let input = (read palpite :: Int)
@@ -50,6 +52,17 @@ main = do
     --     let parcial1 =  aposta
     --else let parcial1 = -aposta
 
+    --FIM if(auxTabela[0] < 70)
+    --else if(auxTabela[0] >= 70 & auxTabela[0] < 85)
+        print "Jogador 1 aposte um numero: "
+        palpite <- getLine
+        let input = (read palpite :: Int)
+
+        print "Jogador 1 aposte outro numero: "
+        palpite <- getLine
+        let input = (read palpite :: Int)
+        --PAREI POR AQUI sono da mizera
+        
     --O mesmo de cima, so que pro Jogador 2
     print "Jogador 2 aposte: "
     palpite <- getLine
