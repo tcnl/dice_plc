@@ -21,6 +21,8 @@ main = do
     --Pontos iniciais
     putMVar tabela [50,50]
 
+    --Loop comecaria aqui
+
     --Inicio, a pessoa aposta num valor que vai cair(1-6)
     print "Jogador 1 aposte: "
     palpite <- getLine
@@ -41,9 +43,12 @@ main = do
     --MVar fica livre de novo
     dado   <- takeMVar jogo
     print dado
+
+    --Se a pessoa acertar o valor do dado, ganha os pontos se nao, perde.
+    --Mas o if/else ta sempre dando erro de parse
     --if(aposta == dado) then 
-    --     let pontos1 = (pontos + aposta)
-    --else let pontos1 = (pontos - aposta)
+    --     let parcial1 =  aposta
+    --else let parcial1 = -aposta
 
     --O mesmo de cima, so que pro Jogador 2
     print "Jogador 2 aposte: "
@@ -66,5 +71,20 @@ main = do
     dado   <- takeMVar jogo
     print dado
     --if(aposta == dado) then 
-    --     let pontos2 = (pontos + aposta)
-    --else let pontos2 = (pontos - aposta)
+    --     let parcial2 =  aposta
+    --else let parcial2 = -aposta
+
+    forkIO $ do putMVar tabela parcial1; putMVar tabela number
+    --Salva a tabela original [50,50]
+    auxTabela <- takeMVar tabela
+    --tabela livre, MVar recebe parcial1
+
+    let auxTabela[0] = auxTabela[0] + (takeMVar tabela)
+    --valor dos pontos do J1 ajustados, libera tabela
+
+    let auxTabela[1] = auxTabela[1] + (takeMVar tabela)
+    --valor dos pontos do J2 ajustados, libera tabela
+    putMVar tabela auxTabela
+    
+    --Fim do while
+    
