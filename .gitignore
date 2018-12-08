@@ -1,0 +1,5 @@
+tests.exe
+tests.hi
+tests.o
+*.hi
+*.o
