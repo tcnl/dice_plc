@@ -78,35 +78,35 @@ main = do
     print $ "Dado: " ++ show dado
 
     let parcial1 = 50
+    let valor1 = (parcial_nivel_um aposta dado parcial1)
+    let parcial1 = valor1
 
-    -- let parcial1 = (parcial aposta dado parcial1)
+    print $ "Parcial 1: " ++ show (parcial1)
 
-    print $ "Parcial 1: " ++ show (parcial_nivel_um aposta dado parcial1)
+    -- --O mesmo de cima, so que pro Jogador 2
+    -- print "Jogador 2 aposte: "
+    -- palpite <- getLine
+    -- let input = (read palpite :: Int)
 
-    --O mesmo de cima, so que pro Jogador 2
-    print "Jogador 2 aposte: "
-    palpite <- getLine
-    let input = (read palpite :: Int)
+    -- --Lanca o(s) dado(s)
+    -- number <- randomRIO (1,6) :: IO Int
 
-    --Lanca o(s) dado(s)
-    number <- randomRIO (1,6) :: IO Int
+    -- --Inicia duas thread, uma salva a aposta na MVar e bloqueia
+    -- --A outra vai ficar esperando a MVar ficar livra pra colocar o resultado do(s) dado(s)
+    -- forkIO $ do putMVar jogo input; putMVar jogo number
 
-    --Inicia duas thread, uma salva a aposta na MVar e bloqueia
-    --A outra vai ficar esperando a MVar ficar livra pra colocar o resultado do(s) dado(s)
-    forkIO $ do putMVar jogo input; putMVar jogo number
+    -- --Pega o valor de MVar(aposta inicial) e coloca e salva
+    -- aposta <- takeMVar jogo
+    -- --Assim a MVar fica livre e recebe o valor dos dados (acima)
+    -- print $ "Aposta: " ++ show aposta
 
-    --Pega o valor de MVar(aposta inicial) e coloca e salva
-    aposta <- takeMVar jogo
-    --Assim a MVar fica livre e recebe o valor dos dados (acima)
-    print $ "Aposta: " ++ show aposta
+    -- --MVar fica livre de novo
+    -- dado   <- takeMVar jogo
+    -- print $ "Dado: " ++ show dado
 
-    --MVar fica livre de novo
-    dado   <- takeMVar jogo
-    print $ "Dado: " ++ show dado
+    -- let parcial2 = 50
 
-    let parcial2 = 50
-
-    print $ "Parcial 2: " ++ show (parcial_nivel_um aposta dado parcial2)
+    -- print $ "Parcial 2: " ++ show (parcial_nivel_um aposta dado parcial2)
 
 
     -- forkIO $ do putMVar tabela parcial1; putMVar tabela number
