@@ -17,11 +17,6 @@ import System.IO
 --Eletivos
 -- 1- Generalizar 4 e 6
 
-parcial :: Int -> Int -> Int -> Int
-parcial aposta dado parcial
-    | aposta == dado = (parcial + dado)
-    | otherwise = (parcial - dado)
-
 level :: Int -> Int
 level n
     | n >= 100 = error "Você ganhou!"
@@ -30,17 +25,20 @@ level n
     | n > 50 = 1
     | n == 0 = error "Você perdeu!"
 
-pontos_nivel_dois :: Int -> Int -> Int
-nivel_dois dado1 dado2
-    | dado1 == dado2 = dado1
-    | otherwise = 0
+parcial_nivel_um :: Int -> Int -> Int -> Int
+parcial_nivel_um aposta dado parcial
+    | aposta == dado = (parcial + dado)
+    | otherwise = (parcial - dado)
 
-pontos_nivel_tres :: Int -> Int -> Int -> Int
-pontos_nivel_dois dado1 dado2 dado3
-    | (dado1 == dado2 && dado2 == dado3) = dado1
-    | otherwise = 0
+parcial_nivel_dois :: Int -> Int -> Int -> Int -> Int
+parcial_nivel_dois aposta dado1 dado2 parcial
+    | (aposta == dado1 && dado1 == dado2) = (parcial + dado1)
+    | otherwise = (parcial - dado1)
 
-
+parcial_nivel_tres :: Int -> Int -> Int -> Int -> Int -> Int
+parcial_nivel_tres aposta dado1 dado2 dado3 parcial
+    | (aposta == dado1 && dado1 == dado2 && dado2 == dado3) = (parcial + dado1)
+    | otherwise = (parcial - dado1)
 
 main :: IO ()
 main = do
@@ -83,7 +81,7 @@ main = do
 
     -- let parcial1 = (parcial aposta dado parcial1)
 
-    print $ "Parcial 1: " ++ show (parcial aposta dado parcial1)
+    print $ "Parcial 1: " ++ show (parcial_nivel_um aposta dado parcial1)
 
     --O mesmo de cima, so que pro Jogador 2
     print "Jogador 2 aposte: "
@@ -108,7 +106,7 @@ main = do
 
     let parcial2 = 50
 
-    print $ "Parcial 2: " ++ show (parcial aposta dado parcial2)
+    print $ "Parcial 2: " ++ show (parcial_nivel_um aposta dado parcial2)
 
 
     -- forkIO $ do putMVar tabela parcial1; putMVar tabela number
