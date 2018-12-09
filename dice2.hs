@@ -56,47 +56,12 @@ main = do
 
     let parcial1 = 50
 
-    --Se a pessoa acertar o valor do dado, ganha os pontos se nao, perde.
-    --Mas o if/else ta sempre dando erro de parse
-    --if(aposta == dado) then
-    --     let parcial1 =  aposta
-    --else let parcial1 = -aposta
+        parcial :: Int -> Int -> Int -> Int
+        parcial aposta dado parcial
+            | aposta == dado = (parcial + dado)
+            | otherwise = (parcial - dado)
 
-    -- parcial1 :: Int -> Int -> Int
-    -- parcial1 aposta dado =
-    --     let acerto = (parcial1 = parcial1 + aposta)
-    --         erro = (parcial1 = parcial1 - aposta)
-    --     if (aposta = dado)
-    --         then acerto
-    --         else erro
-
-    -- parcial1 aposta dado
-    --     | aposta == dado = acerto
-    --     | otherwise = erro
-    --     where   acerto = (parcial1 = parcial1 + dado)
-    --             erro = (parcial1 = parcial1 - dado)
-
-    -- parcial_um :: Int -> Int -> Int -> Int
-    -- parcial_um aposta dado parcial1
-    --     | aposta == dado = acerto
-    --     | otherwise = erro
-    --     where   acerto = (let parcial1 = (parcial1 + aposta))
-    --             erro = (let parcial1 = (parcial1 - aposta))
-
-    -- parcial_um :: Int -> Int -> Int -> Int
-    -- parcial_um aposta dado parcial1 =
-    --     if aposta == dado then (parcial1 + aposta)
-    --     else (parcial1 - aposta)
-
-        parcial_um :: Int -> Int -> Int -> Int
-        parcial_um aposta dado parcial1
-            | aposta == dado = (parcial1 + aposta)
-            | otherwise = (parcial1 - aposta)
-
- 
-    print $ "Parcial 1: " ++ show (parcial_um aposta dado parcial1)
-
-
+    print $ "Parcial 1: " ++ show (parcial aposta dado parcial1)
 
     --O mesmo de cima, so que pro Jogador 2
     print "Jogador 2 aposte: "
@@ -118,33 +83,10 @@ main = do
     --MVar fica livre de novo
     dado   <- takeMVar jogo
     print $ "Dado: " ++ show dado
-    --if(aposta == dado) then
-    --     let parcial2 =  aposta
-    --else let parcial2 = -aposta
 
     let parcial2 = 50
 
-        parcial_dois :: Int -> Int -> Int -> Int
-        -- parcial_dois _ _ 100 = error "Ganhasse!"
-        -- parcial_dois _ _ 0 = error "Perdesse!"
-        parcial_dois aposta dado parcial2
-            | aposta == dado = (parcial2 + aposta)
-            | otherwise = (parcial2 - aposta)
-
-    let parcial2 = parcial_dois aposta dado parcial2
-    -- Fico tentando atualizar o valor de parcial2, mas imprime:
-    -- "Jogador 1 aposte: "
-    -- 3
-    -- "Aposta: 3"
-    -- "Dado: 5"
-    -- "Parcial 1: 47"
-    -- "Jogador 2 aposte: "
-    -- 4
-    -- "Aposta: 4"
-    -- "Dado: 6"
-    -- dado.exe: <<loop>>          <<<<<------------------- loop infinito??
-
-    print $ "Parcial 2: " ++ show parcial2
+    print $ "Parcial 2: " ++ show (parcial aposta dado parcial2)
 
 
     -- forkIO $ do putMVar tabela parcial1; putMVar tabela number
