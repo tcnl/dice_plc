@@ -121,16 +121,31 @@ main = do
     --if(aposta == dado) then
     --     let parcial2 =  aposta
     --else let parcial2 = -aposta
-    
+
     let parcial2 = 50
 
         parcial_dois :: Int -> Int -> Int -> Int
+        -- parcial_dois _ _ 100 = error "Ganhasse!"
+        -- parcial_dois _ _ 0 = error "Perdesse!"
         parcial_dois aposta dado parcial2
             | aposta == dado = (parcial2 + aposta)
-            | otherwise = (parcial1 - aposta)
+            | otherwise = (parcial2 - aposta)
 
+    let parcial2 = parcial_dois aposta dado parcial2
+    -- Fico tentando atualizar o valor de parcial2, mas imprime:
+    -- "Jogador 1 aposte: "
+    -- 3
+    -- "Aposta: 3"
+    -- "Dado: 5"
+    -- "Parcial 1: 47"
+    -- "Jogador 2 aposte: "
+    -- 4
+    -- "Aposta: 4"
+    -- "Dado: 6"
+    -- dado.exe: <<loop>>          <<<<<------------------- loop infinito??
 
-    print $ "Parcial 2: " ++ show (parcial_dois aposta dado parcial2)
+    print $ "Parcial 2: " ++ show parcial2
+
 
     -- forkIO $ do putMVar tabela parcial1; putMVar tabela number
     -- --Salva a tabela original [50,50]
