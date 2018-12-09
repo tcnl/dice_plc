@@ -17,28 +17,87 @@ import System.IO
 --Eletivos
 -- 1- Generalizar 4 e 6
 
-level :: Int -> Int
-level n
-    | n >= 100 = error "Você ganhou!"
-    | n > 85 = 3
-    | n > 70 = 2
-    | n > 50 = 1
-    | n == 0 = error "Você perdeu!"
+-- level :: a -> a
+-- level n
+--     | n >= 100 = error "Você ganhou!"
+--     | n > 85 = nivel_tres
+--     | n <= 70 = nivel_dois
+--     | n <= 50 = nivel_um
+--     | n == 0 = error "Você perdeu!"
+
+nivel_um :: IO Int
+nivel_um = do   tabela <- newEmptyMVar
+                jogo <- newEmptyMVar
+                print "Jogador 1 aposte: "
+                palpite <- getLine
+                let input = (read palpite :: Int)
+                number <- randomRIO (1,6) :: IO Int
+                forkIO $ do putMVar jogo input; putMVar jogo number
+                aposta <- takeMVar jogo
+                print $ "Aposta: " ++ show aposta
+                dado   <- takeMVar jogo
+                print $ "Dado: " ++ show dado
+                let parcial1 = 50
+                let valor1 = (parcial_nivel_um aposta dado parcial1)
+                let parcial1 = valor1
+                print $ "Parcial 1: " ++ show (parcial1)
+                return parcial1
+
+nivel_dois :: IO Int
+nivel_dois = do tabela <- newEmptyMVar
+                jogo <- newEmptyMVar
+                print "Jogador 1 aposte: "
+                palpite <- getLine
+                let input = (read palpite :: Int)
+                number <- randomRIO (1,6) :: IO Int
+                forkIO $ do putMVar jogo input; putMVar jogo number
+                aposta <- takeMVar jogo
+                print $ "Aposta: " ++ show aposta
+                dado   <- takeMVar jogo
+                print $ "Dado: " ++ show dado
+                dado2   <- takeMVar jogo
+                print $ "Dado 2: " ++ show dado2
+                let parcial1 = 50
+                let valor1 = (parcial_nivel_dois aposta dado parcial1)
+                let parcial1 = valor1
+                print $ "Parcial 1: " ++ show (parcial1)
+                return parcial1
+
+-- nivel_tres :: IO()
+-- nivel_tres = do tabela <- newEmptyMVar
+--                 jogo <- newEmptyMVar
+--                 print "Jogador 1 aposte: "
+--                 palpite <- getLine
+--                 let input = (read palpite :: Int)
+--                 number <- randomRIO (1,6) :: IO Int
+--                 forkIO $ do putMVar jogo input; putMVar jogo number
+--                 aposta <- takeMVar jogo
+--                 print $ "Aposta: " ++ show aposta
+--                 dado   <- takeMVar jogo
+--                 print $ "Dado: " ++ show dado
+--                 dado2   <- takeMVar jogo
+--                 print $ "Dado 2: " ++ show dado2
+--                 dado3   <- takeMVar jogo
+--                 print $ "Dado 23: " ++ show dado3
+--                 let parcial1 = 50
+--                 let valor1 = (parcial_nivel_tres aposta dado parcial1)
+--                 let parcial1 = valor1
+--                 print $ "Parcial 1: " ++ show (parcial1)
 
 parcial_nivel_um :: Int -> Int -> Int -> Int
 parcial_nivel_um aposta dado parcial
-    | aposta == dado = (parcial + dado)
-    | otherwise = (parcial - dado)
+    | aposta == dado = (parcial + aposta)
+    | otherwise = (parcial - aposta)
 
 parcial_nivel_dois :: Int -> Int -> Int -> Int -> Int
 parcial_nivel_dois aposta dado1 dado2 parcial
-    | (aposta == dado1 && dado1 == dado2) = (parcial + dado1)
-    | otherwise = (parcial - dado1)
+    | (aposta == dado1 && dado1 == dado2) = (parcial + aposta)
+    | otherwise = (parcial - aposta)
 
 parcial_nivel_tres :: Int -> Int -> Int -> Int -> Int -> Int
 parcial_nivel_tres aposta dado1 dado2 dado3 parcial
-    | (aposta == dado1 && dado1 == dado2 && dado2 == dado3) = (parcial + dado1)
-    | otherwise = (parcial - dado1)
+    | (aposta == dado1 && dado1 == dado2 && dado2 == dado3) = (parcial + aposta)
+    | otherwise = (parcial - aposta)
 
 main :: IO ()
 main = do
@@ -82,6 +141,7 @@ main = do
     let parcial1 = valor1
 
     print $ "Parcial 1: " ++ show (parcial1)
+
 
     -- --O mesmo de cima, so que pro Jogador 2
     -- print "Jogador 2 aposte: "
