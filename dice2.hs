@@ -17,6 +17,31 @@ import System.IO
 --Eletivos
 -- 1- Generalizar 4 e 6
 
+parcial :: Int -> Int -> Int -> Int
+parcial aposta dado parcial
+    | aposta == dado = (parcial + dado)
+    | otherwise = (parcial - dado)
+
+level :: Int -> Int
+level n
+    | n >= 100 = error "Você ganhou!"
+    | n > 85 = 3
+    | n > 70 = 2
+    | n > 50 = 1
+    | n == 0 = error "Você perdeu!"
+
+pontos_nivel_dois :: Int -> Int -> Int
+nivel_dois dado1 dado2
+    | dado1 == dado2 = dado1
+    | otherwise = 0
+
+pontos_nivel_tres :: Int -> Int -> Int -> Int
+pontos_nivel_dois dado1 dado2 dado3
+    | (dado1 == dado2 && dado2 == dado3) = dado1
+    | otherwise = 0
+
+
+
 main :: IO ()
 main = do
     --MVar que a gente vai usar
@@ -56,10 +81,7 @@ main = do
 
     let parcial1 = 50
 
-        parcial :: Int -> Int -> Int -> Int
-        parcial aposta dado parcial
-            | aposta == dado = (parcial + dado)
-            | otherwise = (parcial - dado)
+    -- let parcial1 = (parcial aposta dado parcial1)
 
     print $ "Parcial 1: " ++ show (parcial aposta dado parcial1)
 
