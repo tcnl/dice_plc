@@ -105,4 +105,4 @@ niveis n
     |otherwise             = nivel_um n
 
 main :: IO()
-main = do niveis 90
+main = do niveis 50
