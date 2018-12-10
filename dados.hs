@@ -4,6 +4,16 @@ import Text.Printf
 import Control.Monad
 import System.IO
 
+--Cada um dos niveis basicamente solicita que o jogador digite um valor/aposta para o dado
+    -- e em seguida ele 'lanca' o dado (randomRIO(1,6))
+    -- depois duas threads sao iniciadas, disputando a memoria da MVar jogo
+    -- a primeira que a utiliza eh a 'palpite', deixando a MVar bloqueada
+    -- em seguida a variavel aposta le o valor da MVar e a libera para que o valor do dado seja colocado
+    -- depois a variavel dado le a MVar e a libera
+    -- por fim chama uma funcao que verifica as regras do jogo e atualiza o placar
+    -- chama a funcao de loop para continuar jogando
+    -- OBS: nivel dois e tres sao essencialmente iguais ao um, mudando so as expressoes na regra do jogo
+
 nivel_um :: Int -> IO()
 nivel_um n = do tabela <- newEmptyMVar
                 jogo <- newEmptyMVar
@@ -65,6 +75,8 @@ nivel_tres n = do tabela <- newEmptyMVar
                   print $ "Parcial 1: " ++ show (parcial1)
                   niveis parcial1
 
+
+--Eh aqui onde sao feitas as expressoes das regras do jogo e atualizacao do placar
 parcial_nivel_um :: Int -> Int -> Int -> Int
 parcial_nivel_um aposta dado parcial
     | aposta == dado = (parcial + aposta)
@@ -80,6 +92,8 @@ parcial_nivel_tres aposta dado1 dado2 dado3 parcial
     | (aposta == dado1 && dado1 == dado2 && dado2 == dado3) = (parcial + aposta)
     | otherwise = (parcial - aposta)
 
+
+--loop que coordena vitoria, derrota e passagem de nivel
 niveis :: Int -> IO()
 niveis n
     |(n >= 100)            = print $ "Você ganhou!!!" 
