@@ -44,9 +44,9 @@ nivel_dois n = do tabela <- newEmptyMVar
                   aposta <- takeMVar jogo
                   print $ "Aposta: " ++ show aposta
                   dado   <- takeMVar jogo
-                  print $ "Dado: " ++ show dado
+                  print $ "Dado 1: " ++ show dado
                   dado2   <- takeMVar jogo
-                  print $ "Dado: " ++ show dado2
+                  print $ "Dado 2: " ++ show dado2
                   --let parcial1 = 50
                   let valor1 = (parcial_nivel_dois aposta dado dado2 n)
                   let parcial1 = valor1
@@ -60,7 +60,9 @@ nivel_tres n = do tabela <- newEmptyMVar
                   palpite <- getLine
                   let input = (read palpite :: Int)
                   number <- randomRIO (1,6) :: IO Int
-                  forkIO $ do putMVar jogo input; putMVar jogo number
+                  number2 <- randomRIO (1,6) :: IO Int
+                  number3 <- randomRIO (1,6) :: IO Int
+                  forkIO $ do putMVar jogo input; putMVar jogo number; putMVar jogo number2; putMVar jogo number3
                   aposta <- takeMVar jogo
                   print $ "Aposta: " ++ show aposta
                   dado   <- takeMVar jogo
@@ -68,7 +70,7 @@ nivel_tres n = do tabela <- newEmptyMVar
                   dado2   <- takeMVar jogo
                   print $ "Dado 2: " ++ show dado2
                   dado3   <- takeMVar jogo
-                  print $ "Dado 23: " ++ show dado3
+                  print $ "Dado 3: " ++ show dado3
                 --let parcial1 = 50
                   let valor1 = (parcial_nivel_tres aposta dado dado2 dado3 n)
                   let parcial1 = valor1
@@ -103,4 +105,4 @@ niveis n
     |otherwise             = nivel_um n
 
 main :: IO()
-main = do niveis 50
+main = do niveis 90
