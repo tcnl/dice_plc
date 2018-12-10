@@ -20,7 +20,7 @@ nivel_um n = do tabela <- newEmptyMVar
                 let valor1 = (parcial_nivel_um aposta dado n)
                 let parcial1 = valor1
                 print $ "Parcial 1: " ++ show (parcial1)
-                loopDoSatanas parcial1
+                niveis parcial1
 
 nivel_dois :: Int -> IO()
 nivel_dois n = do tabela <- newEmptyMVar
@@ -41,7 +41,7 @@ nivel_dois n = do tabela <- newEmptyMVar
                   let valor1 = (parcial_nivel_dois aposta dado dado2 n)
                   let parcial1 = valor1
                   print $ "Parcial 1: " ++ show (parcial1)
-                  loopDoSatanas parcial1
+                  niveis parcial1
 
 nivel_tres :: Int -> IO()
 nivel_tres n = do tabela <- newEmptyMVar
@@ -63,7 +63,7 @@ nivel_tres n = do tabela <- newEmptyMVar
                   let valor1 = (parcial_nivel_tres aposta dado dado2 dado3 n)
                   let parcial1 = valor1
                   print $ "Parcial 1: " ++ show (parcial1)
-                  loopDoSatanas parcial1
+                  niveis parcial1
 
 parcial_nivel_um :: Int -> Int -> Int -> Int
 parcial_nivel_um aposta dado parcial
@@ -80,13 +80,13 @@ parcial_nivel_tres aposta dado1 dado2 dado3 parcial
     | (aposta == dado1 && dado1 == dado2 && dado2 == dado3) = (parcial + aposta)
     | otherwise = (parcial - aposta)
 
-loopDoSatanas :: Int -> IO()
-loopDoSatanas n
-    |(n >= 100)            = print $ "Ganhou, otário!" 
+niveis :: Int -> IO()
+niveis n
+    |(n >= 100)            = print $ "Você ganhou!!!" 
     |(n >=  85 && n < 100) = nivel_tres n
     |(n >=  70 && n <  85) = nivel_dois n
-    |(n <    0)            = print $ "CHORA!"
+    |(n <    0)            = print $ "Perdeu!"
     |otherwise             = nivel_um n
 
 main :: IO()
-main = do loopDoSatanas 50
+main = do niveis 50
